@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrapper">
+    <div class="container">
+        <h1>MY GALLERY</h1>
+        <p class="para">Beautiful collection of Photos ,trie to make you happy</p>
+        <div class="gallery">
+            <figure class="card">
+                <img src="Images/image1.jpg" alt="">
+                <figcaption></figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image2.jpg" alt="">
+                <figcaption>Image2</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image3.jpg" alt="">
+                <figcaption>Image3</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image4.jpg" alt="">
+                <figcaption>Image4</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image5.jpg" alt="">
+                <figcaption>Image5</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image6.jpg" alt="">
+                <figcaption>Image6</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image7.jpg" alt="">
+                <figcaption>Image7</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image8.jpg" alt="">
+                <figcaption>Image8</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image9.jpg" alt="">
+                <figcaption>Image10</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image10.jpg" alt="">
+                <figcaption>Image10</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image11.jpg" alt="">
+                <figcaption>Image11</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image12.jpg" alt="">
+                <figcaption>Image12</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image13.jpg" alt="">
+                <figcaption>Image13</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image14.jpg" alt="">
+                <figcaption>Image14</figcaption>
+            </figure>
+            <figure class="card">
+                <img src="Images/image15.jpg" alt="">
+                <figcaption>Image15</figcaption>
+            </figure>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const galleryImages = document.querySelectorAll(".gallery img");
+
+    // Create Lightbox Element
+    const lightbox = document.createElement("div");
+    lightbox.id = "lightbox";
+    lightbox.innerHTML = `
+        <span id="closeBtn">&times;</span>
+        <img id="lightboxImg" src="">
+        <div id="lightboxNav">
+            <button id="prevBtn">&#10094;</button>
+            <button id="nextBtn">&#10095;</button>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.getElementById("closeBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+
+    function showLightbox(index) {
+        currentIndex = index;
+        lightboxImg.src = galleryImages[index].src;
+        lightbox.style.display = "flex";
+    }
+
+    galleryImages.forEach((img, index) => {
+        img.addEventListener("click", () => {
+            showLightbox(index);
+        });
+    });
+
+    closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+    });
+
+    prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentIndex].src;
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentIndex].src;
+    });
+
+    // Close when clicking outside image
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = "none";
+        }
+    });
+});
+</script>
+
+</body>
+
+</html>
